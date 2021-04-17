@@ -4,8 +4,7 @@ import React from 'react';
 class Tile extends React.Component {
     
     render() {
-        console.log(this.props);
-        
+        //tiles value: 0 Ground, 1 Wall
         if (this.props.tile === 0) {
             return (<GroundTile />);
         } else if (this.props.tile === 1) {
