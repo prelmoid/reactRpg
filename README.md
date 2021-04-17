@@ -17,7 +17,7 @@
             maps - tiles for dungeons, city... as well as initial map designs[position of tiles, monsters, ..]
             monsters - icons and classes for enemies
 
-        features
+        components
             app-state - save/load game progress
             dialog-manager - handle dialogs 
             game-menus - game menus (save, load, new game, options[sound on/off], inventory)
@@ -26,7 +26,7 @@
             player - handle player actions
             stats - handle levels and experience
             world - reset game state, start new game, load game
-            
+
         tests - for unit tests etc.
             unit - unit tests
         utils - if needed

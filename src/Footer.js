@@ -5,7 +5,14 @@ class Footer extends React.Component {
     render() {
         return (
             <footer className="App-footer">
-                Made by Geckostudios.ch
+                Made by <a
+                className="App-link"
+                href="https://geckostudios.ch"
+                target="_blank"
+                rel="noopener noreferrer"
+                >
+                geckostudios.ch
+                </a>
             </footer>
         );
     }

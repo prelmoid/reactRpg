@@ -5,7 +5,8 @@ class Header extends React.Component {
     render() {
         return (
             <div className="App-header">
-                A simple RPG game made with React  <a
+                A simple RPG game made with React  
+                <a
                 className="App-link"
                 href="https://reactjs.org"
                 target="_blank"
