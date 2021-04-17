@@ -11,13 +11,7 @@
 
 
 ## Folder Structure:
-    src
-        data
-            items - icons and classes for all the items
-            maps - tiles for dungeons, city... as well as initial map designs[position of tiles, monsters, ..]
-            monsters - icons and classes for enemies
-
-        components
+    src        components
             app-state - save/load game progress
             dialog-manager - handle dialogs 
             game-menus - game menus (save, load, new game, options[sound on/off], inventory)
@@ -34,6 +28,7 @@
         documents related to the game, such as roadmap or contributors etc.
 
     public
+        img - for all the used images
         for public stuff, like manifest.json for icons of the program if saved etc.
 
 ### `highlighting` testline

@@ -1,0 +1,5 @@
+.GroundTile {
+    height: 16px;
+    width: 16px;
+    background: url('/src/data/tiles/UniversalFantasyRLTiles3ed.png') 112 112;
+}

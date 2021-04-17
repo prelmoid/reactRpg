@@ -1,11 +1,12 @@
 import React from 'react';
+import World from './components/world/World';
 
 class Game extends React.Component {
 
     render () {
         return (
             <main className="App-main">
-                Hier kommt das Spiel
+                <World />
             </main>
         );
     }
