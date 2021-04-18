@@ -4,6 +4,7 @@ import MapRow from './MapRow';
 import tiles from './maps/Map1.js'
 
 class Map extends React.Component {
+    
     render() {
         return (
             <div className='MapContainer'>
