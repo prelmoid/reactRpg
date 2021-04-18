@@ -42,11 +42,11 @@ const WallTile = () => {
 const PlayerTile = () => {
     return (
         <div style={{
-            height: 16, width: 16, backgroundSize: '50%', backgroundImage: `url("/img/UniversalFantasyRLTiles3ed.png")`, backgroundPositionX: -32, backgroundPositionY: -96
+            height: 16, width: 16, backgroundImage: `url("/img/UniversalFantasyRLTiles3ed.png")`, backgroundPositionX: -32, backgroundPositionY: -96
 
         }}>
             <div className="playerDiv" style={{
-                height: 16, width: 16, backgroundImage: `url("/img/Heroes_01.png")`, backgroundPositionX: -163, backgroundPositionY: -66
+                height: 16, width: 16, backgroundImage: `url("/img/M_08.png")`, backgroundPositionX: 0, backgroundPositionY: -2
 
             }}>
             </div>
