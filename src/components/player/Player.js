@@ -7,11 +7,13 @@ class PlayerProvider extends React.Component {
         super(props);
         this.state = {
             position: {x: 1, y: 1},
-            setPosition: this.setPosition
+            movePlayer: this.movePlayer
         }
     }
 
-
+    movePlayer = (direction) => {
+        console.log(direction);
+    }
 
     setPosition = ( position ) => {
         this.setState({position: position});

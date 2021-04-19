@@ -1,6 +1,7 @@
 import React from 'react';
 import { PlayerContext } from './components/player/Player';
 import World from './components/world/World';
+import { directions } from './components/Enums'
 
 class Game extends React.Component{
     static contextType = PlayerContext;
@@ -9,22 +10,20 @@ class Game extends React.Component{
         switch (e.key) {
             case 'w':
             case 'ArrowUp':
-                console.log("NORTH");
-                this.context.setPosition({x: 2, y: 2});
-                console.log(this.context);
-                //console.log(this.context[0][0]['positionX']+1);
+                this.context.movePlayer(directions.NORTH);
                 break;
             case 's':
             case 'ArrowDown':
-                console.log("SOUTH");
+                this.context.movePlayer(directions.SOUTH);
+
                 break;
             case 'a':
             case 'ArrowLeft':
-                console.log("WEST");
+                this.context.movePlayer(directions.WEST);
                 break;
             case 'd':
             case 'ArrowRight':
-                console.log("EAST");
+                this.context.movePlayer(directions.EAST);
                 break;
             default:
                 console.log("nothing to do with this key");
