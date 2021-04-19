@@ -16,11 +16,13 @@ class PlayerProvider extends React.Component {
 
     movePlayer = (direction) => {
         let map = Maps[this.state.dungeonLevel].tiles;
+        let moveCompleted = false;
         switch (direction) {
             case 0:
                 //check if there's ground
                 if (map[this.state.position.x - 1][this.state.position.y] === 0) {
                     this.setState({position: {x: this.state.position.x - 1, y: this.state.position.y}});
+                    moveCompleted = true;
                 } else {
                     console.log('cant move there');
                 }
@@ -29,8 +31,8 @@ class PlayerProvider extends React.Component {
                 //check if there's ground
                 if (map[this.state.position.x][this.state.position.y + 1] === 0) {
                     this.setState({position: {x: this.state.position.x, y: this.state.position.y + 1}});
+                    moveCompleted = true;
                 } else {
-                    console.log(map[this.state.position.x + 1][this.state.position.y])
                     console.log('cant move there');
                 }
                 break;
@@ -38,6 +40,7 @@ class PlayerProvider extends React.Component {
                 //check if there's ground
                 if (map[this.state.position.x + 1][this.state.position.y] === 0) {
                     this.setState({position: {x: this.state.position.x + 1, y: this.state.position.y}});
+                    moveCompleted = true;
                 } else {
                     console.log('cant move there');
                 }
@@ -46,13 +49,15 @@ class PlayerProvider extends React.Component {
                 //check if there's ground
                 if (map[this.state.position.x][this.state.position.y - 1] === 0) {
                     this.setState({position: {x: this.state.position.x, y: this.state.position.y - 1}});
+                    moveCompleted = true;
                 } else {
                     console.log('cant move there');
                 }
                 break;
             default:
-                console.log('wrong move input');            
+                console.log('wrong move input');   
         }
+        return moveCompleted;
     }
 
     setPosition = ( position ) => {
@@ -72,5 +77,4 @@ class PlayerProvider extends React.Component {
         );
     }
 }
-
 export {PlayerProvider}
