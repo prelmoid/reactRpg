@@ -1,18 +1,22 @@
 import React from 'react';
 import './Map.css'
 import MapRow from './MapRow';
-import tiles from './maps/Map1.js'
+import { Maps } from './maps/Maps'
+import { PlayerContext } from '../player/Player';
+
 
 class Map extends React.Component {
-    
+    static contextType = PlayerContext;
     render() {
+        let mapLevel = this.context.dungeonLevel;
+        let map = Maps[mapLevel].tiles;
         return (
             <div className='MapContainer'>
                 {
-                    tiles.map((row, index) => {
+                    map.map((row, index) => {
                         return (
                             <MapRow 
-                                tiles={row}
+                                row={row}
                                 index={index}
                                 key={JSON.stringify(row) + index} />
                         );

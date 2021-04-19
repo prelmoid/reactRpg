@@ -20,5 +20,4 @@ const tiles = [
         [1,1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,1]
     ];
 
-
-export default tiles;
+export default { tiles };
