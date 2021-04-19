@@ -7,7 +7,7 @@ class MapRow extends React.Component {
             <div className='row'
               style={{ height: 16 , display: 'flex'}}>
               {
-                this.props.tiles.map((tile, index) => {
+                this.props.row.map((tile, index) => {
                   return(
                     <Tile
                       tile={tile}

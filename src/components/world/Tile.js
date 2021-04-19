@@ -9,7 +9,7 @@ class Tile extends React.Component {
         //console.log(this.context);
         //return (<div>{this.props.tile}</div>);
         
-        if (this.context.position.x === this.props.index[0] && this.context.position.x === this.props.index[1]) {
+        if (this.context.position.x === this.props.index[1] && this.context.position.y === this.props.index[0]) {
             return (
                 <PlayerTile />
             );
