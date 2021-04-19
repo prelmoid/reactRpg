@@ -30,7 +30,6 @@ class PlayerProvider extends React.Component {
                 if (map[this.state.position.x][this.state.position.y + 1] === 0) {
                     this.setState({position: {x: this.state.position.x, y: this.state.position.y + 1}});
                 } else {
-                    console.log(this.state);
                     console.log(map[this.state.position.x + 1][this.state.position.y])
                     console.log('cant move there');
                 }
