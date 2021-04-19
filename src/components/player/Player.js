@@ -1,18 +1,30 @@
-import React, { useState, createContext } from 'react';
+import React, { createContext } from 'react';
 
 export const PlayerContext = createContext();
 
-export const PlayerProvider = props => {
-    const [player, setPosition] = useState ([
-        {
-            positionX: 1,
-            positionY: 1,
-        },
-    ]);
+class PlayerProvider extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            position: {x: 1, y: 1},
+            setPosition: this.setPosition
+        }
+    }
 
-    return (
-        <PlayerContext.Provider value={[player, setPosition]}>
-             {props.children}
-        </PlayerContext.Provider>
-    );
+
+
+    setPosition = ( position ) => {
+        this.setState({position: position});
+    };
+
+    render () {
+        const { children } = this.props;
+        return (
+            <PlayerContext.Provider value={this.state}>
+                 {children}
+            </PlayerContext.Provider>
+        );
+    }
 }
+
+export {PlayerProvider}
