@@ -10,7 +10,8 @@ class PlayerProvider extends React.Component {
             position: {x: 1, y: 1},
             movePlayer: this.movePlayer,
             dungeonLevel: '1_1',
-            setDungeonLevel: this.setDungeonLevel
+            setDungeonLevel: this.setDungeonLevel,
+            setPosition: this.setPosition
         }
     }
 
