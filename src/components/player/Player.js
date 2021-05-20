@@ -16,49 +16,43 @@ class PlayerProvider extends React.Component {
     }
 
     movePlayer = (direction) => {
-        let map = Maps[this.state.dungeonLevel].tiles;
+        let position;
         let moveCompleted = false;
         switch (direction) {
             case 0:
                 //check if there's ground
-                if (map[this.state.position.x - 1][this.state.position.y] === 0) {
-                    this.setState({position: {x: this.state.position.x - 1, y: this.state.position.y}});
-                    moveCompleted = true;
-                } else {
-                    console.log('cant move there');
-                }
+                position = {x: this.state.position.x - 1, y: this.state.position.y};
+                moveCompleted = this.checkPosition(position);
                 break;
             case 1:
                 //check if there's ground
-                if (map[this.state.position.x][this.state.position.y + 1] === 0) {
-                    this.setState({position: {x: this.state.position.x, y: this.state.position.y + 1}});
-                    moveCompleted = true;
-                } else {
-                    console.log('cant move there');
-                }
+                position = {x: this.state.position.x, y: this.state.position.y + 1};
+                moveCompleted = this.checkPosition(position);
                 break;
             case 2: 
                 //check if there's ground
-                if (map[this.state.position.x + 1][this.state.position.y] === 0) {
-                    this.setState({position: {x: this.state.position.x + 1, y: this.state.position.y}});
-                    moveCompleted = true;
-                } else {
-                    console.log('cant move there');
-                }
+                position = {x: this.state.position.x + 1, y: this.state.position.y};
+                moveCompleted = this.checkPosition(position);
                 break;
             case 3:
                 //check if there's ground
-                if (map[this.state.position.x][this.state.position.y - 1] === 0) {
-                    this.setState({position: {x: this.state.position.x, y: this.state.position.y - 1}});
-                    moveCompleted = true;
-                } else {
-                    console.log('cant move there');
-                }
+                position = {x: this.state.position.x, y: this.state.position.y - 1};
+                moveCompleted = this.checkPosition(position);
                 break;
             default:
                 console.log('wrong move input');   
         }
         return moveCompleted;
+    }
+
+    checkPosition = ( position ) => {
+        let map = Maps[this.state.dungeonLevel].tiles;
+        if(map[position.x][position.y] === 0) {
+            this.setPosition(position);
+            return true;
+        }
+        console.log('cant move there');
+        return false;
     }
 
     setPosition = ( position ) => {
