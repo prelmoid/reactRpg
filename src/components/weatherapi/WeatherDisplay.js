@@ -19,7 +19,7 @@ class WeatherDisplay extends React.Component {
         if (navigator.geolocation) {
           navigator.geolocation.getCurrentPosition(this.updateLocationInfo);
         } else {
-          console.log('no access to navigator')
+          console.log('no access to navigator');
         }
       }
 
