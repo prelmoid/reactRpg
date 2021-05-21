@@ -1,8 +1,4 @@
-import { render, fireEvent } from '@testing-library/react';
-import { directions } from '../components/Enums'
-import { PlayerContext, PlayerProvider } from '../components/player/Player';
-
-
+import { PlayerProvider } from '../components/player/Player';
 
 let playerPosition = {x: 1, y: 1};
 

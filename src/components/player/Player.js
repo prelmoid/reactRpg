@@ -61,6 +61,7 @@ class PlayerProvider extends React.Component {
 
     setDungeonLevel = ( dungeonMap ) => {
         this.setState({dungeonLevel: dungeonMap});
+        console.log(this.state.dungeonLevel);
     }
 
     render () {
