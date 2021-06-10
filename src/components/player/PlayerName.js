@@ -16,12 +16,12 @@ class PlayerName extends React.Component {
         return (
         <React.Fragment> 
             <input placeholder="Input Playername" ref={this.textInput} />
-            <div
+            <button
             onClick={() => send(this.textInput.current.value)}
             className="icon"
             >
             Save Name
-            </div>
+            </button>
         </React.Fragment>
         );
     }

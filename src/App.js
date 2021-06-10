@@ -4,6 +4,7 @@ import Footer from './Footer';
 import Game from './Game';
 import { PlayerProvider } from './components/player/Player';
 import WeatherDisplay from './components/weatherapi/WeatherDisplay';
+import PlayerStats from './components/player/PlayerStats';
 
 function App() {
   return (
@@ -12,7 +13,9 @@ function App() {
       <WeatherDisplay />
       <PlayerProvider>
         <Game />
+        <PlayerStats/>
       </PlayerProvider>
+      
       <Footer />
     </div>
   );

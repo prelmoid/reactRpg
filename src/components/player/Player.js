@@ -11,6 +11,14 @@ class PlayerProvider extends React.Component {
         this.state = {
             name: '',
             position: {x: 1, y: 1},
+            gold: 10,
+            health: 20,
+            maxHealth: 20,
+            attackPower: 4,
+            armorRating: 2,
+            lvl: 1,
+            experience: 0,
+            experienceToNextLevel: 20,
             movePlayer: this.movePlayer,
             dungeonLevel: '1_1',
             setDungeonLevel: this.setDungeonLevel,
@@ -89,7 +97,6 @@ class PlayerProvider extends React.Component {
                     <div>Playername: {this.state.name}</div>
                 }
                     {children}
-                <div> test</div>
             </PlayerContext.Provider>
         );
     }
