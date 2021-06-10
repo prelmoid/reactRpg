@@ -5,8 +5,11 @@ import { directions } from './components/Enums'
 
 class Game extends React.Component{
     static contextType = PlayerContext;
-    checkEvent = (e) => {
-        
+    checkEvent = (e) => { 
+        console.log()
+        if(e.path.length > 4) {
+            return;
+        }
         switch (e.key) {
             case 'w':
             case 'ArrowUp':
@@ -27,7 +30,6 @@ class Game extends React.Component{
                 break;
             default:
                 console.log("nothing to do with this key");
-
         }
     }
 
@@ -42,7 +44,6 @@ class Game extends React.Component{
     render () {
         return (
             <main className="App-main">
- 
                 <World />
             </main>
         );

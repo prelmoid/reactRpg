@@ -1,12 +1,15 @@
 import React, { createContext } from 'react';
 import { Maps } from '../world/maps/Maps'
+import PlayerName from './PlayerName';
+
 
 export const PlayerContext = createContext();
 
-class PlayerProvider extends React.Component {
+class PlayerProvider extends React.Component {    
     constructor(props) {
         super(props);
         this.state = {
+            name: '',
             position: {x: 1, y: 1},
             movePlayer: this.movePlayer,
             dungeonLevel: '1_1',
@@ -64,13 +67,32 @@ class PlayerProvider extends React.Component {
         console.log(this.state.dungeonLevel);
     }
 
+    setPlayerName(name) {
+        this.setState({name: name});
+    }
+
     render () {
         const { children } = this.props;
         return (
             <PlayerContext.Provider value={this.state}>
-                 {children}
+                {
+                    this.state.name === '' ?
+                    <div>
+                        <PlayerName
+                            send={(prop) => {
+                                this.setPlayerName(prop)
+                                console.log(prop)
+                            }}
+                            />
+                    </div>
+                    :
+                    <div>Playername: {this.state.name}</div>
+                }
+                    {children}
+                <div> test</div>
             </PlayerContext.Provider>
         );
     }
 }
+
 export {PlayerProvider}
