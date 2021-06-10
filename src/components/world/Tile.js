@@ -4,11 +4,7 @@ import { PlayerContext } from '../player/Player';
 class Tile extends React.Component {
     //tiles value: 0 Ground, 1 Wall
     static contextType = PlayerContext;
-    render () {
-        
-        //console.log(this.context);
-        //return (<div>{this.props.tile}</div>);
-        
+    render () {        
         if (this.context.position.x === this.props.index[1] && this.context.position.y === this.props.index[0]) {
             return (
                 <PlayerTile />
