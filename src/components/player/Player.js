@@ -1,5 +1,5 @@
 import React, { createContext } from 'react';
-import { Maps } from '../world/maps/Maps'
+import { Maps } from '../world/maps/Maps';
 import PlayerName from './PlayerName';
 import './Player.css';
 

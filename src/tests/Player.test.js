@@ -1,6 +1,7 @@
 import { PlayerProvider } from '../components/player/Player';
 import { fireEvent, render, screen } from '@testing-library/react';
 import PlayerStats from '../components/player/PlayerStats';
+import { Maps } from '../components/world/maps/Maps'
 
 let playerPosition = {x: 1, y: 1};
 
@@ -27,6 +28,29 @@ test('test movement, all possible', () => {
     expect(player.movePlayer(2)).toEqual(true);
     player.state.position = playerPosition;
     expect(player.movePlayer(3)).toEqual(true);
+});
+
+test('test no movement, all monsters', () => {
+  const player = new PlayerProvider();
+  //first with no monsters
+  player.state.dungeonMonsters = [];
+  player.state.dungeonLevel = 'TestAllMonsters';
+  expect(player.movePlayer(0)).toEqual(true);
+  player.state.position = playerPosition;
+  expect(player.movePlayer(1)).toEqual(true);
+  player.state.position = playerPosition;
+  expect(player.movePlayer(2)).toEqual(true);
+  player.state.position = playerPosition;
+  expect(player.movePlayer(3)).toEqual(true);
+  //test with monsters no movement possible
+  player.state.dungeonMonsters = Maps['TestAllMonsters'].monsters;
+  expect(player.movePlayer(0)).toEqual(false);
+  player.state.position = playerPosition;
+  expect(player.movePlayer(1)).toEqual(false);
+  player.state.position = playerPosition;
+  expect(player.movePlayer(2)).toEqual(false);
+  player.state.position = playerPosition;
+  expect(player.movePlayer(3)).toEqual(false);
 });
  
 
