@@ -20,7 +20,7 @@ class PlayerName extends React.Component {
             onClick={() => send(this.textInput.current.value)}
             className="icon"
             >
-            Save Name
+            Save Playername
             </button>
         </React.Fragment>
         );
