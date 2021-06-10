@@ -1,6 +1,5 @@
 import { PlayerProvider } from '../components/player/Player';
 import { fireEvent, render, screen } from '@testing-library/react';
-import PlayerName from '../components/player/PlayerName';
 import PlayerStats from '../components/player/PlayerStats';
 
 let playerPosition = {x: 1, y: 1};
