@@ -21,6 +21,7 @@ class PlayerProvider extends React.Component {
             experienceToNextLevel: 20,
             movePlayer: this.movePlayer,
             dungeonLevel: '1_1',
+            dungeonMonsters: Maps['1_1'].monsters,
             setDungeonLevel: this.setDungeonLevel,
             setPosition: this.setPosition
         }
@@ -58,7 +59,7 @@ class PlayerProvider extends React.Component {
 
     checkPosition = ( position ) => {
         let map = Maps[this.state.dungeonLevel].tiles;
-        if(map[position.x][position.y] === 0) {
+        if(map[position.x][position.y] === 0 && !(this.state.dungeonMonsters.find((monster) => monster.position.x === position.x && monster.position.y === position.y))) { //
             this.setPosition(position);
             return true;
         }
@@ -72,7 +73,7 @@ class PlayerProvider extends React.Component {
 
     setDungeonLevel = ( dungeonMap ) => {
         this.setState({dungeonLevel: dungeonMap});
-        console.log(this.state.dungeonLevel);
+        this.setState({dungeonMonsters: Maps[dungeonMap].monsters})
     }
 
     setPlayerName(name) {
