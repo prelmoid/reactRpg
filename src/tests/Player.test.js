@@ -1,6 +1,7 @@
 import { PlayerProvider } from '../components/player/Player';
 import { fireEvent, render, screen } from '@testing-library/react';
 import PlayerName from '../components/player/PlayerName';
+import PlayerStats from '../components/player/PlayerStats';
 
 let playerPosition = {x: 1, y: 1};
 
@@ -35,5 +36,16 @@ test('Test Playername input', () => {
     fireEvent.change(screen.getByPlaceholderText(/Input Playername/i), {target: {value: 'prelmoid'},});
     fireEvent.click(screen.getByText(/Save Playername/i))
     const linkElement = screen.getByText(/prelmoid/i);
+    expect(linkElement).toBeInTheDocument();
+  });
+
+  test('Test Playerstats', () => {
+    render(<PlayerProvider>
+                <PlayerStats />
+            </PlayerProvider>
+    );
+    let linkElement = screen.getByText(/Gold/i);
+    expect(linkElement).toBeInTheDocument();
+    linkElement = screen.getByText(/10/i);
     expect(linkElement).toBeInTheDocument();
   });
