@@ -1,7 +1,7 @@
 import React, { createContext } from 'react';
 import { Maps } from '../world/maps/Maps'
 import PlayerName from './PlayerName';
-
+import './Player.css';
 
 export const PlayerContext = createContext();
 
@@ -85,16 +85,15 @@ class PlayerProvider extends React.Component {
             <PlayerContext.Provider value={this.state}>
                 {
                     this.state.name === '' ?
-                    <div>
+                    <div className='PlayerName'>
                         <PlayerName
                             send={(prop) => {
                                 this.setPlayerName(prop)
-                                console.log(prop)
                             }}
                             />
                     </div>
                     :
-                    <div>Playername: {this.state.name}</div>
+                    <div className='PlayerName'>Playername: {this.state.name}</div>
                 }
                     {children}
             </PlayerContext.Provider>
