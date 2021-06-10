@@ -20,4 +20,28 @@ const tiles = [
         [1,1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,1]
     ];
 
-export default { tiles };
+const monsters = [
+    {
+        type: 'rat',
+        position: {x: 3, y: 7}
+    },
+    {
+        type: 'rat',
+        position: {x: 9, y: 12}
+    },
+    {
+        type: 'rat',
+        position: {x: 13, y: 14}
+    },
+    {
+        type: 'rat',
+        position: {x: 2, y: 13}
+    },
+    {
+        type: 'rat',
+        position: {x: 14, y: 4}
+    }
+    ];
+
+
+export default { tiles, monsters };

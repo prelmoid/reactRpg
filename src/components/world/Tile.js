@@ -1,10 +1,20 @@
 import React from 'react';
 import { PlayerContext } from '../player/Player';
+import { Maps } from './maps/Maps'
 
 class Tile extends React.Component {
     //tiles value: 0 Ground, 1 Wall
     static contextType = PlayerContext;
-    render () {        
+
+    render () {
+        let mapLevel = this.context.dungeonLevel;
+        let monsterArray = Maps[mapLevel].monsters;
+        if (monsterArray.find((monster) => monster.position.x === this.props.index[1] && monster.position.y === this.props.index[0])){
+            return (
+                <RatTile />
+            );
+        }
+
         if (this.context.position.x === this.props.index[1] && this.context.position.y === this.props.index[0]) {
             return (
                 <PlayerTile />
@@ -54,5 +64,19 @@ const PlayerTile = () => {
     );
 }
 
+const RatTile = () => {
+    return (
+        <div style={{
+            height: 16, width: 16, backgroundImage: `url("/img/UniversalFantasyRLTiles3ed.png")`, backgroundPositionX: -32, backgroundPositionY: -96
+
+        }}>
+            <div className="monsterDiv" style={{
+                height: 16, width: 16, backgroundImage: `url("/img/roguelikecreatures.png")`, backgroundPositionX: -1, backgroundPositionY: -18
+
+            }}>
+            </div>
+        </div>
+    );
+}
 
 export default Tile;
