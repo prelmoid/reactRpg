@@ -9,7 +9,7 @@ class Tile extends React.Component {
     render () {
         let mapLevel = this.context.dungeonLevel;
         let monsterArray = this.context.dungeonMonsters;
-        if (monsterArray.find((monster) => monster.position.x === this.props.index[1] && monster.position.y === this.props.index[0])){
+        if (monsterArray.find((monster) => monster.state.position.x === this.props.index[1] && monster.state.position.y === this.props.index[0])){
             return (
                 <RatTile />
             );

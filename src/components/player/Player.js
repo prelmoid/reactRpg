@@ -2,6 +2,7 @@ import React, { createContext } from 'react';
 import { Maps } from '../world/maps/Maps';
 import PlayerName from './PlayerName';
 import './Player.css';
+import Monster from '../monsters/Monster';
 
 export const PlayerContext = createContext();
 
@@ -21,10 +22,11 @@ class PlayerProvider extends React.Component {
             experienceToNextLevel: 20,
             movePlayer: this.movePlayer,
             dungeonLevel: '1_1',
-            dungeonMonsters: Maps['1_1'].monsters,
+            dungeonMonsters: Maps['1_1'].monsters.map((monster) => new Monster(monster.type, monster.position)),
             setDungeonLevel: this.setDungeonLevel,
             setPosition: this.setPosition
         }
+        
     }
 
     movePlayer = (direction) => {
@@ -54,12 +56,16 @@ class PlayerProvider extends React.Component {
             default:
                 console.log('wrong move input');   
         }
+        //if the player made a move (either he could walk or not) the monsters get to make their move
+        this.state.dungeonMonsters.map((monster) => monster.moveMonster()); 
+        console.log('monster should move...')
         return moveCompleted;
     }
 
     checkPosition = ( position ) => {
         let map = Maps[this.state.dungeonLevel].tiles;
-        if(map[position.x][position.y] === 0 && !(this.state.dungeonMonsters.find((monster) => monster.position.x === position.x && monster.position.y === position.y))) { //
+        //check for position is free, and no monster is standing on the ground field
+        if(map[position.x][position.y] === 0 && !(this.state.dungeonMonsters.find((monster) => monster.state.position.x === position.x && monster.state.position.y === position.y))) { //
             this.setPosition(position);
             return true;
         }
