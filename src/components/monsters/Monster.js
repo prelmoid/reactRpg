@@ -20,14 +20,12 @@ class Monster extends React.Component {
     moveMonster = () => {
         let position;
         let moveCompleted = false;
-        console.log(directions);
         let direction = 0; //directions.values()[Math.random().nextInt(directions.values().length)]       
         switch (direction) {
             case 0:
                 //check if there's ground
                 position = {x: this.state.position.x - 1, y: this.state.position.y};
                 moveCompleted = this.checkPosition(position);
-                console.log('im here' + moveCompleted)
                 break;
             case 1:
                 //check if there's ground
@@ -47,7 +45,6 @@ class Monster extends React.Component {
             default:
                 console.log('wrong move input');   
         }
-        console.log(this.state)
         return moveCompleted;
     }
 
@@ -56,10 +53,8 @@ class Monster extends React.Component {
         //check for position is free, and no monster is standing on the ground field, and no player
         if(map[position.x][position.y] === 0) { //&& !(this.context.state.dungeonMonsters.find((monster) => monster.position.x === position.x && monster.position.y === position.y)) && position.x !== this.context.state.position.x && position.y !== this.context.state.position.y
             this.setPosition(position);
-            console.log('monster should move')
             return true;
         }
-        console.log('cant move there[monster]');
         return false;
     }
 

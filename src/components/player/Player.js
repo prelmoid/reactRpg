@@ -57,8 +57,7 @@ class PlayerProvider extends React.Component {
                 console.log('wrong move input');   
         }
         //if the player made a move (either he could walk or not) the monsters get to make their move
-        this.state.dungeonMonsters.map((monster) => monster.moveMonster()); 
-        console.log('monster should move...')
+        this.state.dungeonMonsters.map((monster) => monster.moveMonster());
         return moveCompleted;
     }
 
