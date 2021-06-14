@@ -18,7 +18,6 @@ class Game extends React.Component{
             case 's':
             case 'ArrowDown':
                 this.context.movePlayer(directions.SOUTH);
-
                 break;
             case 'a':
             case 'ArrowLeft':
@@ -28,7 +27,13 @@ class Game extends React.Component{
             case 'ArrowRight':
                 this.context.movePlayer(directions.EAST);
                 break;
+            case ' ':
+            case 'Enter':
+                console.log('attack!!');
+                this.context.attack();
+                break;
             default:
+                console.log(e)
                 console.log("nothing to do with this key");
         }
     }

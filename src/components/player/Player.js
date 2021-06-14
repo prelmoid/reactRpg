@@ -15,6 +15,7 @@ class PlayerProvider extends React.Component {
             gold: 10,
             health: 20,
             maxHealth: 20,
+            attack: this.attack,
             attackPower: 4,
             armorRating: 2,
             numberOfMoves: 0,
@@ -28,6 +29,10 @@ class PlayerProvider extends React.Component {
             setPosition: this.setPosition
         }
         
+    }
+
+    attack = () => {
+        console.log('attack player')
     }
 
     movePlayer = (direction) => {
@@ -63,7 +68,7 @@ class PlayerProvider extends React.Component {
     }
 
     moveAllMonsters = async () => {
-        const response = this.state.dungeonMonsters.map((monster) => monster.moveMonster(this.state));
+        this.state.dungeonMonsters.map((monster) => monster.moveMonster(this.state));
         this.updateMoveNumber();
     }
 

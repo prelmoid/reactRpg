@@ -1,13 +1,11 @@
 import React from 'react';
 import { PlayerContext } from '../player/Player';
-import { Maps } from './maps/Maps'
 
 class Tile extends React.Component {
     //tiles value: 0 Ground, 1 Wall
     static contextType = PlayerContext;
 
     render () {
-        let mapLevel = this.context.dungeonLevel;
         let monsterArray = this.context.dungeonMonsters;
         if (monsterArray.find((monster) => monster.state.position.x === this.props.index[1] && monster.state.position.y === this.props.index[0])){
             return (
