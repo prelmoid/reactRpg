@@ -17,30 +17,34 @@ class Monster extends React.Component {
         }
     }
 
-    moveMonster = (playerPosition, monsterPositions) => {
+    moveMonster = (playerState, direction = null) => {
         let position;
         let moveCompleted = false;
-        let direction = Math.floor(Math.random() * (Object.keys(directions).length));
+        //if no direction is indicated for the monster, use a random direction from the enum
+        if(!direction){
+            direction = Math.floor(Math.random() * (Object.keys(directions).length));
+        }
+        
         switch (direction) {
             case 0:
                 //check if there's ground
                 position = {x: this.state.position.x - 1, y: this.state.position.y};
-                moveCompleted = this.checkPosition(position, playerPosition, monsterPositions);
+                moveCompleted = this.checkPosition(position, playerState);
                 break;
             case 1:
                 //check if there's ground
                 position = {x: this.state.position.x, y: this.state.position.y + 1};
-                moveCompleted = this.checkPosition(position, playerPosition, monsterPositions);
+                moveCompleted = this.checkPosition(position, playerState);
                 break;
             case 2: 
                 //check if there's ground
                 position = {x: this.state.position.x + 1, y: this.state.position.y};
-                moveCompleted = this.checkPosition(position, playerPosition, monsterPositions);
+                moveCompleted = this.checkPosition(position, playerState);
                 break;
             case 3:
                 //check if there's ground
                 position = {x: this.state.position.x, y: this.state.position.y - 1};
-                moveCompleted = this.checkPosition(position, playerPosition, monsterPositions);
+                moveCompleted = this.checkPosition(position, playerState);
                 break;
             default:
                 console.log('wrong move input monster');   
@@ -48,10 +52,10 @@ class Monster extends React.Component {
         return moveCompleted;
     }
 
-    checkPosition = ( position, playerPosition, monsterPositions ) => {
-        let map = Maps['1_1'].tiles; 
+    checkPosition = ( position, playerState ) => {
+        let map = Maps[playerState.dungeonLevel].tiles;
         //check for position is free, and no monster is standing on the ground field, and no player
-        if(map[position.x][position.y] === 0 && playerPosition.x !== position.x && playerPosition.y !== position.y && !(monsterPositions.find((monster) => monster.position.x === position.x && monster.position.y === position.y))) { //&& !(this.context.state.dungeonMonsters.find((monster) => monster.position.x === position.x && monster.position.y === position.y)) && position.x !== this.context.state.position.x && position.y !== this.context.state.position.y
+        if(map[position.x][position.y] === 0 && playerState.position.x !== position.x && playerState.position.y !== position.y && !(playerState.dungeonMonsters.find((monster) => monster.state.position.x === position.x && monster.state.position.y === position.y))) { 
             this.setPosition(position);
             return true;
         }
