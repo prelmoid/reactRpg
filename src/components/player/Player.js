@@ -63,7 +63,7 @@ class PlayerProvider extends React.Component {
     }
 
     moveAllMonsters = async () => {
-        const response = this.state.dungeonMonsters.map((monster) => monster.moveMonster(this.state.position));
+        const response = this.state.dungeonMonsters.map((monster) => monster.moveMonster(this.state.position, this.state.dungeonMonsters));
         this.updateMoveNumber();
     }
 
