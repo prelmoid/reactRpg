@@ -62,13 +62,24 @@ test('Test Playername input', () => {
     expect(linkElement).toBeInTheDocument();
   });
 
-  test('Test Playerstats', () => {
-    render(<PlayerProvider>
-                <PlayerStats />
-            </PlayerProvider>
-    );
-    let linkElement = screen.getByText(/Gold/i);
-    expect(linkElement).toBeInTheDocument();
-    linkElement = screen.getByText(/10/i);
-    expect(linkElement).toBeInTheDocument();
-  });
+test('Test Playerstats', () => {
+  render(<PlayerProvider>
+              <PlayerStats />
+          </PlayerProvider>
+  );
+  let linkElement = screen.getByText(/Gold/i);
+  expect(linkElement).toBeInTheDocument();
+  linkElement = screen.getByText(/10/i);
+  expect(linkElement).toBeInTheDocument();
+});
+
+test('Test Playerstats Gold gain', () => {
+  const player = new PlayerProvider();
+  expect(player.calculateAttackDmg(10, 1)).toEqual(9);
+});
+
+test('Test Playerstats Level gain', () => {
+  const player = new PlayerProvider();
+  player.calculateExperienceLevel(25);
+  expect(player.state.lvl).toEqual(2);
+});

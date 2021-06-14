@@ -27,7 +27,9 @@ class PlayerProvider extends React.Component {
             dungeonLevel: '1_1',
             dungeonMonsters: Maps['1_1'].monsters.map((monster) => new Monster(monster.type, monster.position)),
             setDungeonLevel: this.setDungeonLevel,
-            setPosition: this.setPosition
+            setPosition: this.setPosition,
+            calculateAttackDmg: this.calculateAttackDmg,
+            calculateExperienceLevel: this.calculateExperienceLevel
         }
         
     }
@@ -37,62 +39,68 @@ class PlayerProvider extends React.Component {
         //find monster north
         let toAttackMonster = this.state.dungeonMonsters.find((monster) => monster.state.position.x === this.state.position.x - 1 && monster.state.position.y === this.state.position.y && monster.state.alive === true)
         if(toAttackMonster) {
-            this.calculateAttackDamge(toAttackMonster)
-            console.log('monster north')
+            this.attackMonster(toAttackMonster)
             return;
         }
         //find monster east
         toAttackMonster = this.state.dungeonMonsters.find((monster) => monster.state.position.x === this.state.position.x && monster.state.position.y === this.state.position.y + 1 && monster.state.alive === true)
         if(toAttackMonster) {
-            this.calculateAttackDamge(toAttackMonster)
-            console.log('monster east')
+            this.attackMonster(toAttackMonster)
             return;
         }
         //find monster south
         toAttackMonster = this.state.dungeonMonsters.find((monster) => monster.state.position.x === this.state.position.x + 1 && monster.state.position.y === this.state.position.y && monster.state.alive === true)
         if(toAttackMonster) {
-            this.calculateAttackDamge(toAttackMonster)
-            console.log('monster south')
+            this.attackMonster(toAttackMonster)
             return;
         }
         //find monster west
         toAttackMonster = this.state.dungeonMonsters.find((monster) => monster.state.position.x === this.state.position.x && monster.state.position.y === this.state.position.y - 1 && monster.state.alive === true)
         if(toAttackMonster) {
-            this.calculateAttackDamge(toAttackMonster)
-            console.log('monster west')
+            this.attackMonster(toAttackMonster)
             return;
         }
         return;
     }
 
-    calculateAttackDamge = (monster) => {
-        //calculate Attackdamage
-        //damage = [round]{(attackPower*attackPower)/(attackPower + armorRating of the attacked monster)}
-        let dmg = Math.round(this.state.attackPower*this.state.attackPower / (this.state.attackPower + monster.state.armorRating))
+    attackMonster = (monster) => {
+        let dmg = this.calculateAttackDmg(this.state.attackPower, monster.state.armorRating);
         //reduce health of monster
         monster.state.health = monster.state.health - dmg
-        //remove monster
+        //remove monster, if dead
         if(monster.state.health - dmg <= 0) {
             monster.state.alive = false;
             this.setState({numberOfEnemiesKilled: this.state.numberOfEnemiesKilled + 1});
-            if(this.state.experience + monster.state.experience >= this.state.experienceToNextLevel) {
-                //Levelup maxHealth: +15 | attackPower: +5 | armorRating: +1
-                let restExperience = this.state.experienceToNextLevel - (this.state.experience + monster.state.experience)
-                this.setState({experience: restExperience, 
-                                lvl: this.state.lvl + 1, 
-                                maxHealth: this.state.maxHealth + 15, 
-                                health: this.state.health + 15,
-                                attackPower: this.state.attackPower + 5,
-                                armorRating: this.state.armorRating + 1
-                            })
-            } else {
-                this.setState({experience: this.state.experience + monster.state.experience})
-            }
+            //calculate experience lvl of player
+            this.calculateExperienceLevel(monster.state.experience);
+            //calculate gold gained
             this.setState({gold: this.state.gold + monster.state.gold});
-            
         }
-        console.log(monster);
         return;
+    }
+
+    calculateExperienceLevel = (gainedExperience) => {
+        if(this.state.experience + gainedExperience >= this.state.experienceToNextLevel) {
+            //Levelup maxHealth: +15 | attackPower: +5 | armorRating: +1 | experienceToNextLevel: + 10%
+            let restExperience = this.state.experienceToNextLevel - (this.state.experience + gainedExperience)
+            this.setState({experience: restExperience,
+                            experienceToNextLevel: this.state.experienceToNextLevel + Math.floor(this.state.experienceToNextLevel * 0.3),
+                            lvl: this.state.lvl + 1, 
+                            maxHealth: this.state.maxHealth + 15, 
+                            health: this.state.health + 15,
+                            attackPower: this.state.attackPower + 5,
+                            armorRating: this.state.armorRating + 1
+                        })
+        } else {
+            this.setState({experience: this.state.experience + gainedExperience})
+        }
+        return;
+    }
+
+    calculateAttackDmg = (attackPower, armorRating) => {
+        //calculate Attackdamage
+        //damage = [round]{(attackPower*attackPower)/(attackPower + armorRating of the attacked monster)}
+        return Math.round(attackPower*attackPower / (attackPower + armorRating))
     }
 
     movePlayer = (direction) => {
