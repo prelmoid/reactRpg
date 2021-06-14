@@ -19,6 +19,7 @@ class PlayerProvider extends React.Component {
             attackPower: 4,
             armorRating: 2,
             numberOfMoves: 0,
+            numberOfEnemiesKilled: 0,
             lvl: 1,
             experience: 0,
             experienceToNextLevel: 20,
@@ -32,7 +33,66 @@ class PlayerProvider extends React.Component {
     }
 
     attack = () => {
-        console.log('attack player')
+        //check if there is a monster around the player
+        //find monster north
+        let toAttackMonster = this.state.dungeonMonsters.find((monster) => monster.state.position.x === this.state.position.x - 1 && monster.state.position.y === this.state.position.y && monster.state.alive === true)
+        if(toAttackMonster) {
+            this.calculateAttackDamge(toAttackMonster)
+            console.log('monster north')
+            return;
+        }
+        //find monster east
+        toAttackMonster = this.state.dungeonMonsters.find((monster) => monster.state.position.x === this.state.position.x && monster.state.position.y === this.state.position.y + 1 && monster.state.alive === true)
+        if(toAttackMonster) {
+            this.calculateAttackDamge(toAttackMonster)
+            console.log('monster east')
+            return;
+        }
+        //find monster south
+        toAttackMonster = this.state.dungeonMonsters.find((monster) => monster.state.position.x === this.state.position.x + 1 && monster.state.position.y === this.state.position.y && monster.state.alive === true)
+        if(toAttackMonster) {
+            this.calculateAttackDamge(toAttackMonster)
+            console.log('monster south')
+            return;
+        }
+        //find monster west
+        toAttackMonster = this.state.dungeonMonsters.find((monster) => monster.state.position.x === this.state.position.x && monster.state.position.y === this.state.position.y - 1 && monster.state.alive === true)
+        if(toAttackMonster) {
+            this.calculateAttackDamge(toAttackMonster)
+            console.log('monster west')
+            return;
+        }
+        return;
+    }
+
+    calculateAttackDamge = (monster) => {
+        //calculate Attackdamage
+        //damage = [round]{(attackPower*attackPower)/(attackPower + armorRating of the attacked monster)}
+        let dmg = Math.round(this.state.attackPower*this.state.attackPower / (this.state.attackPower + monster.state.armorRating))
+        //reduce health of monster
+        monster.state.health = monster.state.health - dmg
+        //remove monster
+        if(monster.state.health - dmg <= 0) {
+            monster.state.alive = false;
+            this.setState({numberOfEnemiesKilled: this.state.numberOfEnemiesKilled + 1});
+            if(this.state.experience + monster.state.experience >= this.state.experienceToNextLevel) {
+                //Levelup maxHealth: +15 | attackPower: +5 | armorRating: +1
+                let restExperience = this.state.experienceToNextLevel - (this.state.experience + monster.state.experience)
+                this.setState({experience: restExperience, 
+                                lvl: this.state.lvl + 1, 
+                                maxHealth: this.state.maxHealth + 15, 
+                                health: this.state.health + 15,
+                                attackPower: this.state.attackPower + 5,
+                                armorRating: this.state.armorRating + 1
+                            })
+            } else {
+                this.setState({experience: this.state.experience + monster.state.experience})
+            }
+            this.setState({gold: this.state.gold + monster.state.gold});
+            
+        }
+        console.log(monster);
+        return;
     }
 
     movePlayer = (direction) => {
@@ -80,7 +140,7 @@ class PlayerProvider extends React.Component {
     checkPosition = ( position ) => {
         let map = Maps[this.state.dungeonLevel].tiles;
         //check for position is free, and no monster is standing on the ground field
-        if(map[position.x][position.y] === 0 && !(this.state.dungeonMonsters.find((monster) => monster.state.position.x === position.x && monster.state.position.y === position.y))) { //
+        if(map[position.x][position.y] === 0 && !(this.state.dungeonMonsters.find((monster) => monster.state.position.x === position.x && monster.state.position.y === position.y  && monster.state.alive === true))) { //
             this.setPosition(position);
             return true;
         }

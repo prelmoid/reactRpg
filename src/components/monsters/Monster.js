@@ -8,10 +8,12 @@ class Monster extends React.Component {
         this.state = {
             type: type,
             position: position,
+            alive: true,
             health: 20,
             attackPower: 4,
             armorRating: 2,
             experience: 5,
+            gold: Math.floor(Math.random() * 10),
             moveMonster: this.moveMonster,
             setPosition: this.setPosition
         }
@@ -55,7 +57,7 @@ class Monster extends React.Component {
     checkPosition = ( position, playerState ) => {
         let map = Maps[playerState.dungeonLevel].tiles;
         //check for position is free, and no monster is standing on the ground field, and no player
-        if(map[position.x][position.y] === 0 && playerState.position.x !== position.x && playerState.position.y !== position.y && !(playerState.dungeonMonsters.find((monster) => monster.state.position.x === position.x && monster.state.position.y === position.y))) { 
+        if(map[position.x][position.y] === 0 && playerState.position.x !== position.x && playerState.position.y !== position.y && !(playerState.dungeonMonsters.find((monster) => monster.state.position.x === position.x && monster.state.position.y === position.y && monster.state.alive === true))) { 
             this.setPosition(position);
             return true;
         }
