@@ -17,6 +17,7 @@ class PlayerProvider extends React.Component {
             maxHealth: 20,
             attackPower: 4,
             armorRating: 2,
+            numberOfMoves: 0,
             lvl: 1,
             experience: 0,
             experienceToNextLevel: 20,
@@ -57,8 +58,18 @@ class PlayerProvider extends React.Component {
                 console.log('wrong move input');   
         }
         //if the player made a move (either he could walk or not) the monsters get to make their move
-        this.state.dungeonMonsters.map((monster) => monster.moveMonster());
+        this.moveAllMonsters();
         return moveCompleted;
+    }
+
+    moveAllMonsters = async () => {
+        const response = this.state.dungeonMonsters.map((monster) => monster.moveMonster());
+        this.updateMoveNumber();
+    }
+
+    updateMoveNumber() {
+        let numberOfMoves = this.state.numberOfMoves + 1;
+        this.setState({numberOfMoves: numberOfMoves});
     }
 
     checkPosition = ( position ) => {
