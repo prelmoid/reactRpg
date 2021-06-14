@@ -1,20 +1,40 @@
-import { fireEvent, render, screen, waitFor } from '@testing-library/react';
+
 import Monster from '../components/monsters/Monster';
 
-let monsters = [];
-let monster = new Monster('rat', {x: 0, y: 1});
-monsters.push(monster);
-let playerState = {position: {x: 1, y: 0}, dungeonMonsters: monsters, dungeonLevel: 'TestAllMovement'};
-let monsterPosition = {x: 1, y: 1};
 
-test('test movement', () => {
-    let testMonster = new Monster('rat', {x: 1, y: 1});
-    expect(testMonster.moveMonster(playerState, 0)).toEqual(true); //free field
-    testMonster.setPosition(monsterPosition);
-    expect(testMonster.moveMonster(playerState, 1)).toEqual(false); //monster on the field
-    testMonster.setPosition(monsterPosition);
-    expect(testMonster.moveMonster(playerState, 2)).toEqual(true); //free field
-    testMonster.setPosition(monsterPosition);
-    expect(testMonster.moveMonster(playerState, 3)).toEqual(false); //player on the field
 
+test('test movement north', () => {
+    let monsters = [];
+    let monster = new Monster('rat', {x: 0, y: 1});
+    monsters.push(monster);
+    let playerState = {position: {x: 1, y: 0}, dungeonMonsters: monsters, dungeonLevel: 'TestAllMovement'};
+    let testMonsterNorth = new Monster('rat', {x: 1, y: 1});
+    expect(testMonsterNorth.moveMonster(playerState, 0)).toEqual(false); //monster on the field
+});
+
+test('test movement east', () => {
+    let monsters = [];
+    let monster = new Monster('rat', {x: 0, y: 1});
+    monsters.push(monster);
+    let playerState = {position: {x: 1, y: 0}, dungeonMonsters: monsters, dungeonLevel: 'TestAllMovement'};
+    let testMonsterEast = new Monster('rat', {x: 1, y: 1});
+    expect(testMonsterEast.moveMonster(playerState, 1)).toEqual(false); //free field
+});
+
+test('test movement south', () => {
+    let monsters = [];
+    let monster = new Monster('rat', {x: 0, y: 1});
+    monsters.push(monster);
+    let playerState = {position: {x: 1, y: 0}, dungeonMonsters: monsters, dungeonLevel: 'TestAllMovement'};
+    let testMonsterSouth = new Monster('rat', {x: 1, y: 1});
+    expect(testMonsterSouth.moveMonster(playerState, 2)).toEqual(true); //free field
+});
+
+test('test movement west', () => {
+    let monsters = [];
+    let monster = new Monster('rat', {x: 0, y: 1});
+    monsters.push(monster);
+    let playerState = {position: {x: 1, y: 0}, dungeonMonsters: monsters, dungeonLevel: 'TestAllMovement'};
+    let testMonsterWest = new Monster('rat', {x: 1, y: 1});
+    expect(testMonsterWest.moveMonster(playerState, 3)).toEqual(false); //player on the field
 });
