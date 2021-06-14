@@ -13,11 +13,11 @@ class PlayerProvider extends React.Component {
             name: '',
             position: {x: 1, y: 1},
             gold: 10,
-            health: 20,
-            maxHealth: 20,
+            health: 30,
+            maxHealth: 30,
             attack: this.attack,
-            attackPower: 4,
-            armorRating: 2,
+            attackPower: 10,
+            armorRating: 5,
             numberOfMoves: 0,
             numberOfEnemiesKilled: 0,
             lvl: 1,
@@ -29,7 +29,8 @@ class PlayerProvider extends React.Component {
             setDungeonLevel: this.setDungeonLevel,
             setPosition: this.setPosition,
             calculateAttackDmg: this.calculateAttackDmg,
-            calculateExperienceLevel: this.calculateExperienceLevel
+            calculateExperienceLevel: this.calculateExperienceLevel,
+            moveAllMonsters: this.moveAllMonsters
         }
         
     }
@@ -40,33 +41,31 @@ class PlayerProvider extends React.Component {
         let toAttackMonster = this.state.dungeonMonsters.find((monster) => monster.state.position.x === this.state.position.x - 1 && monster.state.position.y === this.state.position.y && monster.state.alive === true)
         if(toAttackMonster) {
             this.attackMonster(toAttackMonster)
-            return;
+            return true;
         }
         //find monster east
         toAttackMonster = this.state.dungeonMonsters.find((monster) => monster.state.position.x === this.state.position.x && monster.state.position.y === this.state.position.y + 1 && monster.state.alive === true)
         if(toAttackMonster) {
             this.attackMonster(toAttackMonster)
-            return;
+            return true;
         }
         //find monster south
         toAttackMonster = this.state.dungeonMonsters.find((monster) => monster.state.position.x === this.state.position.x + 1 && monster.state.position.y === this.state.position.y && monster.state.alive === true)
         if(toAttackMonster) {
             this.attackMonster(toAttackMonster)
-            return;
+            return true;
         }
         //find monster west
         toAttackMonster = this.state.dungeonMonsters.find((monster) => monster.state.position.x === this.state.position.x && monster.state.position.y === this.state.position.y - 1 && monster.state.alive === true)
         if(toAttackMonster) {
             this.attackMonster(toAttackMonster)
-            return;
+            return true;
         }
-        return;
+        return false;
     }
 
     attackMonster = (monster) => {
         let dmg = this.calculateAttackDmg(this.state.attackPower, monster.state.armorRating);
-        //reduce health of monster
-        monster.state.health = monster.state.health - dmg
         //remove monster, if dead
         if(monster.state.health - dmg <= 0) {
             monster.state.alive = false;
@@ -75,7 +74,11 @@ class PlayerProvider extends React.Component {
             this.calculateExperienceLevel(monster.state.experience);
             //calculate gold gained
             this.setState({gold: this.state.gold + monster.state.gold});
+        } else {
+            //reduce health of monster
+            monster.state.health = monster.state.health - dmg
         }
+
         return;
     }
 
@@ -87,7 +90,7 @@ class PlayerProvider extends React.Component {
                             experienceToNextLevel: this.state.experienceToNextLevel + Math.floor(this.state.experienceToNextLevel * 0.3),
                             lvl: this.state.lvl + 1, 
                             maxHealth: this.state.maxHealth + 15, 
-                            health: this.state.health + 15,
+                            health: this.state.maxHealth + 15,
                             attackPower: this.state.attackPower + 5,
                             armorRating: this.state.armorRating + 1
                         })

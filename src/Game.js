@@ -30,7 +30,9 @@ class Game extends React.Component{
             case ' ':
             case 'Enter':
                 console.log('attack!!');
-                this.context.attack();
+                if(this.context.attack()){
+                    this.context.moveAllMonsters();
+                }
                 break;
             default:
                 console.log(e)
