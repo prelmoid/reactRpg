@@ -32,7 +32,7 @@ class PlayerProvider extends React.Component {
             calculateExperienceLevel: this.calculateExperienceLevel,
             moveAllMonsters: this.moveAllMonsters,
             weather: '',
-            visibilityRadius: 10,
+            visibilityRadius: 1,
             setWeather: this.setWeather            
         }
         
