@@ -202,7 +202,6 @@ class PlayerProvider extends React.Component {
         } else {
             this.setState({visibilityRadius: 1})
         }
-        this.setState({visibilityRadius: 100})
     }
 
     render () {
