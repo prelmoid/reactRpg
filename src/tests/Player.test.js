@@ -74,11 +74,10 @@ test('Test Playerstats', () => {
   expect(linkElement).toBeInTheDocument();
 });
 
-test('Test Playerstats Gold gain', () => {
+test('Test attack dmg calculation', () => {
   const player = new PlayerProvider();
   expect(player.calculateAttackDmg(10, 1)).toEqual(9);
 });
-
 /*
 test('Test Playerstats Level gain', () => {
   const player = new PlayerProvider();
