@@ -1,0 +1,10 @@
+.WeatherDisplay {
+    background-color: #363c47;
+    min-height: 5vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: calc(10px + 2vmin);
+    color: white;
+  }
+  

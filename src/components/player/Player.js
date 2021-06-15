@@ -30,7 +30,10 @@ class PlayerProvider extends React.Component {
             setPosition: this.setPosition,
             calculateAttackDmg: this.calculateAttackDmg,
             calculateExperienceLevel: this.calculateExperienceLevel,
-            moveAllMonsters: this.moveAllMonsters
+            moveAllMonsters: this.moveAllMonsters,
+            weather: '',
+            visibilityRadius: 10,
+            setWeather: this.setWeather            
         }
         
     }
@@ -171,6 +174,23 @@ class PlayerProvider extends React.Component {
 
     setPlayerName(name) {
         this.setState({name: name});
+    }
+
+    setWeather = (weatherCondition) => {
+        this.setState({weather: weatherCondition});
+        if(weatherCondition === 'clear sky') {
+            this.setState({visibilityRadius: 6})
+        } else if(weatherCondition === 'few clouds') {
+            this.setState({visibilityRadius: 5})
+        } else if(weatherCondition === 'broken clouds') {
+            this.setState({visibilityRadius: 4})
+        } else if(weatherCondition === 'shower rain' || weatherCondition === 'snow' || weatherCondition === 'mist') {
+            this.setState({visibilityRadius: 3})
+        } else if(weatherCondition === 'rain' || weatherCondition === 'thunderstorm') {
+            this.setState({visibilityRadius: 2})
+        } else {
+            this.setState({visibilityRadius: 1})
+        }
     }
 
     render () {

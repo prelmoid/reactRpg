@@ -1,6 +1,8 @@
 import React from 'react';
-
+import { PlayerContext } from '../player/Player';
+import './WeatherDisplay.css';
 class WeatherDisplay extends React.Component {
+    static contextType = PlayerContext;
     constructor(props) {
         super(props);
         this.state = {
@@ -28,7 +30,8 @@ class WeatherDisplay extends React.Component {
         fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${this.state.lat}&lon=${this.state.lon}&units=metric&appid=e6e4c0c127532850511bb5e116bce323`)
             .then(response => response.json())
             .then(json => {
-               this.setState({city: json.name, temperature: json.main.temp})
+               this.setState({city: json.name, temperature: json.main.temp, description: json.weather[0].description, icon: `https://openweathermap.org/img/wn/${json.weather[0].icon}@2x.png`})
+               this.context.setWeather(json.weather[0].description);
             })
             .catch((err) => console.log(err))
     }
@@ -36,7 +39,7 @@ class WeatherDisplay extends React.Component {
     render() {
         return (
             <div className='WeatherDisplay'>
-                The temperature at your current location {this.state.city} is {this.state.temperature}°C
+                The temperature at your current location {this.state.city} is {this.state.temperature}°C <img src={this.state.icon} alt={this.state.description}/>
             </div>
         );
 

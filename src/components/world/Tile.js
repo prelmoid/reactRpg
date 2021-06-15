@@ -7,9 +7,17 @@ class Tile extends React.Component {
 
     render () {
         let monsterArray = this.context.dungeonMonsters;
+        let visibility = false;
+        if (this.props.index[1] <= this.context.position.x + this.context.visibilityRadius 
+            && this.props.index[1] >= this.context.position.x - this.context.visibilityRadius
+            && this.props.index[0] <= this.context.position.y + this.context.visibilityRadius 
+            && this.props.index[0] >= this.context.position.y - this.context.visibilityRadius) {
+            visibility = true;
+        }
+
         if (monsterArray.find((monster) => monster.state.position.x === this.props.index[1] && monster.state.position.y === this.props.index[0] && monster.state.alive === true)){
             return (
-                <RatTile />
+                <RatTile visibility={visibility}/>
             );
         }
 
@@ -19,30 +27,47 @@ class Tile extends React.Component {
             );
         }
         if (this.props.tile === 0) {
-            return (<GroundTile />);
+            return (<GroundTile visibility={visibility}/>);
         } else if (this.props.tile === 1) {
-            return (<WallTile />);
+            return (<WallTile visibility={visibility}/>);
         }
         return (<div>{this.props.tile}</div>);
     }
 }
 
-const GroundTile = () => {
+const GroundTile = (visibility) => {
+    let styles;
+    if (visibility.visibility === true) {
+        styles = {
+            height: 16, width: 16, backgroundImage: `url("/img/UniversalFantasyRLTiles3ed.png")`, 
+            backgroundPositionX: -32, backgroundPositionY: -96, backgroundColor: '#000000'
+        };
+    } else {
+        styles = {
+            height: 16, width: 16, backgroundColor: '#000000'
+        };
+    }
     return (
-        <div style={{
-            height: 16, width: 16, backgroundImage: `url("/img/UniversalFantasyRLTiles3ed.png")`, backgroundPositionX: -32, backgroundPositionY: -96
-
-        }}>
+        
+        <div style={styles}>
         </div>
     );
 }
 
-const WallTile = () => {
-    return (
-        <div style={{
+const WallTile = (visibility) => {
+    let styles;
+    if (visibility.visibility === true) {
+        console.log('wall visible')
+        styles = {
             height: 16, width: 16, backgroundImage: `url("/img/UniversalFantasyRLTiles3ed.png")`, backgroundPositionX: -32, backgroundPositionY: -112
-
-        }}>
+        };
+    } else {
+        styles = {
+            height: 16, width: 16, backgroundColor: '#000000'
+        };
+    }
+    return (
+        <div style={styles}>
           </div>
     );
 }
@@ -62,16 +87,23 @@ const PlayerTile = () => {
     );
 }
 
-const RatTile = () => {
+const RatTile = (visibility) => {
+    let styles;
+    if (visibility.visibility === true) {
+        styles = {
+                height: 16, width: 16, backgroundImage: `url("/img/roguelikecreatures.png")`, backgroundPositionX: -1, backgroundPositionY: -18
+        };
+    } else {
+        styles = {
+            height: 16, width: 16, backgroundColor: '#000000'
+        };
+    }
     return (
         <div style={{
             height: 16, width: 16, backgroundImage: `url("/img/UniversalFantasyRLTiles3ed.png")`, backgroundPositionX: -32, backgroundPositionY: -96
 
         }}>
-            <div className="monsterDiv" style={{
-                height: 16, width: 16, backgroundImage: `url("/img/roguelikecreatures.png")`, backgroundPositionX: -1, backgroundPositionY: -18
-
-            }}>
+            <div className="monsterDiv" style={styles}>
             </div>
         </div>
     );

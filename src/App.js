@@ -11,8 +11,9 @@ function App() {
   return (
     <div className="App">
       <Header />
-      <WeatherDisplay />
+      
       <PlayerProvider>
+        <WeatherDisplay />
         <Game />
         <PlayerStats/>
       </PlayerProvider>
