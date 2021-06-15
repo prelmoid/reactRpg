@@ -155,6 +155,13 @@ class PlayerProvider extends React.Component {
 
     checkPosition = ( position ) => {
         let map = Maps[this.state.dungeonLevel].tiles;
+        //check if the field is a 'stair' to change lvl
+        if(map[position.x][position.y] === 2) {
+            console.log('switch level');
+            this.setDungeonLevel(Maps[this.state.dungeonLevel].nextMap);
+            return false;
+        }
+
         //check for position is free, and no monster is standing on the ground field
         if(map[position.x][position.y] === 0 && !(this.state.dungeonMonsters.find((monster) => monster.state.position.x === position.x && monster.state.position.y === position.y  && monster.state.alive === true))) { //
             this.setPosition(position);
@@ -184,7 +191,7 @@ class PlayerProvider extends React.Component {
         this.setState({weather: weatherCondition});
         if(weatherCondition === 'clear sky') {
             this.setState({visibilityRadius: 6})
-        } else if(weatherCondition === 'few clouds') {
+        } else if(weatherCondition === 'few clouds' || weatherCondition === 'scattered clouds') {
             this.setState({visibilityRadius: 5})
         } else if(weatherCondition === 'broken clouds') {
             this.setState({visibilityRadius: 4})
@@ -195,6 +202,7 @@ class PlayerProvider extends React.Component {
         } else {
             this.setState({visibilityRadius: 1})
         }
+        this.setState({visibilityRadius: 100})
     }
 
     render () {

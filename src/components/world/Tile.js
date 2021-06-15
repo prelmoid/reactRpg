@@ -30,6 +30,8 @@ class Tile extends React.Component {
             return (<GroundTile visibility={visibility}/>);
         } else if (this.props.tile === 1) {
             return (<WallTile visibility={visibility}/>);
+        } else if (this.props.tile === 2) {
+            return (<StairTile visibility={visibility}/>);
         }
         return (<div>{this.props.tile}</div>);
     }
@@ -40,7 +42,26 @@ const GroundTile = (visibility) => {
     if (visibility.visibility === true) {
         styles = {
             height: 16, width: 16, backgroundImage: `url("/img/UniversalFantasyRLTiles3ed.png")`, 
-            backgroundPositionX: -32, backgroundPositionY: -96, backgroundColor: '#000000'
+            backgroundPositionX: -32, backgroundPositionY: -96
+        };
+    } else {
+        styles = {
+            height: 16, width: 16, backgroundColor: '#000000'
+        };
+    }
+    return (
+        
+        <div style={styles}>
+        </div>
+    );
+}
+
+const StairTile = (visibility) => {
+    let styles;
+    if (visibility.visibility === true) {
+        styles = {
+            height: 16, width: 16, backgroundImage: `url("/img/UniversalFantasyRLTiles3ed.png")`, 
+            backgroundPositionX: -16, backgroundPositionY: -128
         };
     } else {
         styles = {
