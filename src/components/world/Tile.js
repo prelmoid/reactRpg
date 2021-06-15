@@ -17,7 +17,7 @@ class Tile extends React.Component {
 
         if (monsterArray.find((monster) => monster.state.position.x === this.props.index[1] && monster.state.position.y === this.props.index[0] && monster.state.alive === true)){
             return (
-                <RatTile visibility={visibility}/>
+                <MonsterTile visibility={visibility}/>
             );
         }
 
@@ -107,7 +107,7 @@ const PlayerTile = () => {
     );
 }
 
-const RatTile = (visibility) => {
+const MonsterTile = (visibility) => {
     let styles;
     if (visibility.visibility === true) {
         styles = {
