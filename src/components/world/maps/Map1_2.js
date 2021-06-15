@@ -44,6 +44,6 @@ const monsters = [
 ];
 
 const playerStartPosition = {x: 3, y: 2};
-const nextMap = '1_2';
+const nextMap = '1_1';
 
-export default { tiles, monsters, playerStartPosition };
+export default { tiles, monsters, playerStartPosition, nextMap};
