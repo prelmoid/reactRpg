@@ -5,14 +5,33 @@ import { Maps } from '../world/maps/Maps';
 class Monster extends React.Component {
     constructor(type, position) {
         super();
+        let health = 1;
+        let attackPower = 0;
+        let armorRating = 0;
+        let experience = 1;
+        switch(type) {
+            case 'rat':
+                health = 10;
+                attackPower = 4;
+                armorRating = 3;
+                experience = 5;
+                break;
+            case 'scorpion':
+                health = 20;
+                attackPower = 6;
+                armorRating = 4;
+                experience = 10;
+                break;
+            default:
+        }
         this.state = {
             type: type,
             position: position,
             alive: true,
-            health: 10,
-            attackPower: 4,
-            armorRating: 3,
-            experience: 5,
+            health: health,
+            attackPower: attackPower,
+            armorRating: armorRating,
+            experience: experience,
             gold: Math.floor(Math.random() * 10),
             moveMonster: this.moveMonster,
             setPosition: this.setPosition

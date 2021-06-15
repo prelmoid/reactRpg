@@ -14,10 +14,10 @@ class Tile extends React.Component {
             && this.props.index[0] >= this.context.position.y - this.context.visibilityRadius) {
             visibility = true;
         }
-
-        if (monsterArray.find((monster) => monster.state.position.x === this.props.index[1] && monster.state.position.y === this.props.index[0] && monster.state.alive === true)){
+        let monster = monsterArray.find((monster) => monster.state.position.x === this.props.index[1]  && monster.state.position.y === this.props.index[0]  && monster.state.alive === true)
+        if (monster){
             return (
-                <MonsterTile visibility={visibility}/>
+                <MonsterTile visibility={visibility} type={monster.state.type} />
             );
         }
 
@@ -107,12 +107,21 @@ const PlayerTile = () => {
     );
 }
 
-const MonsterTile = (visibility) => {
+const MonsterTile = (props) => {
     let styles;
-    if (visibility.visibility === true) {
-        styles = {
-                height: 16, width: 16, backgroundImage: `url("/img/roguelikecreatures.png")`, backgroundPositionX: -1, backgroundPositionY: -18
-        };
+    if (props.visibility === true) {
+        switch(props.type){
+            case 'rat':
+                styles = { height: 16, width: 16, backgroundImage: `url("/img/roguelikecreatures.png")`, backgroundPositionX: -1, backgroundPositionY: -18 };
+                break;
+            case 'scorpion':
+                styles = { height: 16, width: 16, backgroundImage: `url("/img/roguelikecreatures.png")`, backgroundPositionX: -48, backgroundPositionY: -65 };
+                break;
+            default:
+                styles = { height: 16, width: 16, backgroundImage: `url("/img/roguelikecreatures.png")`, backgroundPositionX: -1, backgroundPositionY: -18 };
+        }
+
+        
     } else {
         styles = {
             height: 16, width: 16, backgroundColor: '#000000'

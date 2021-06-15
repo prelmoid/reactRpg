@@ -193,7 +193,7 @@ class PlayerProvider extends React.Component {
             this.setState({visibilityRadius: 6})
         } else if(weatherCondition === 'few clouds' || weatherCondition === 'scattered clouds') {
             this.setState({visibilityRadius: 5})
-        } else if(weatherCondition === 'broken clouds') {
+        } else if(weatherCondition === 'broken clouds' || weatherCondition === 'overcast clouds') {
             this.setState({visibilityRadius: 4})
         } else if(weatherCondition === 'shower rain' || weatherCondition === 'snow' || weatherCondition === 'mist') {
             this.setState({visibilityRadius: 3})

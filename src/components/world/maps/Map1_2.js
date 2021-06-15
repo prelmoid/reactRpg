@@ -22,11 +22,11 @@ const tiles = [
 
 const monsters = [
 {
-    type: 'rat',
+    type: 'scorpion',
     position: {x: 3, y: 6}
 },
 {
-    type: 'rat',
+    type: 'scorpion',
     position: {x: 1, y: 11}
 },
 {
