@@ -70,6 +70,7 @@ class PlayerProvider extends React.Component {
 
     attackMonster = (monster) => {
         let dmg = this.calculateAttackDmg(this.state.attackPower, monster.state.armorRating);
+        monster.state.isAttacked = true;
         //remove monster, if dead
         if(monster.state.health - dmg <= 0) {
             monster.state.alive = false;
@@ -82,6 +83,10 @@ class PlayerProvider extends React.Component {
             //reduce health of monster
             monster.state.health = monster.state.health - dmg
         }
+        setTimeout(() => {
+            monster.state.isAttacked = false;
+            this.setState({numberOfMoves: this.state.numberOfMoves + 1});
+          }, 500);
         return;
     }
 

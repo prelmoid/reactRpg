@@ -32,6 +32,7 @@ class Monster extends React.Component {
             attackPower: attackPower,
             armorRating: armorRating,
             experience: experience,
+            isAttacked: false,
             gold: Math.floor(Math.random() * 10),
             moveMonster: this.moveMonster,
             setPosition: this.setPosition

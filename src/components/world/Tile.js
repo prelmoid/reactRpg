@@ -1,6 +1,6 @@
 import React from 'react';
 import { PlayerContext } from '../player/Player';
-
+import './Map.css'
 class Tile extends React.Component {
     //tiles value: 0 Ground, 1 Wall
     static contextType = PlayerContext;
@@ -17,7 +17,7 @@ class Tile extends React.Component {
         let monster = monsterArray.find((monster) => monster.state.position.x === this.props.index[1]  && monster.state.position.y === this.props.index[0]  && monster.state.alive === true)
         if (monster){
             return (
-                <MonsterTile visibility={visibility} type={monster.state.type} />
+                <MonsterTile visibility={visibility} type={monster.state.type} isAttacked={monster.state.isAttacked} />
             );
         }
 
@@ -132,7 +132,7 @@ const MonsterTile = (props) => {
             height: 16, width: 16, backgroundImage: `url("/img/UniversalFantasyRLTiles3ed.png")`, backgroundPositionX: -32, backgroundPositionY: -96
 
         }}>
-            <div className="monsterDiv" style={styles}>
+            <div className={`monsterDiv ${props.isAttacked ? " swordAttack" : " "}`} style={styles}>
             </div>
         </div>
     );
