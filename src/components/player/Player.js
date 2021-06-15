@@ -16,7 +16,7 @@ class PlayerProvider extends React.Component {
             health: 30,
             maxHealth: 30,
             attack: this.attack,
-            attackPower: 10,
+            attackPower: 11,
             armorRating: 5,
             numberOfMoves: 0,
             numberOfEnemiesKilled: 0,
@@ -78,14 +78,13 @@ class PlayerProvider extends React.Component {
             //reduce health of monster
             monster.state.health = monster.state.health - dmg
         }
-
         return;
     }
 
     calculateExperienceLevel = (gainedExperience) => {
         if(this.state.experience + gainedExperience >= this.state.experienceToNextLevel) {
             //Levelup maxHealth: +15 | attackPower: +5 | armorRating: +1 | experienceToNextLevel: + 10%
-            let restExperience = this.state.experienceToNextLevel - (this.state.experience + gainedExperience)
+            let restExperience = (this.state.experience + gainedExperience) - this.state.experienceToNextLevel;
             this.setState({experience: restExperience,
                             experienceToNextLevel: this.state.experienceToNextLevel + Math.floor(this.state.experienceToNextLevel * 0.3),
                             lvl: this.state.lvl + 1, 
@@ -106,7 +105,7 @@ class PlayerProvider extends React.Component {
         return Math.round(attackPower*attackPower / (attackPower + armorRating))
     }
 
-    movePlayer = (direction) => {
+    movePlayer = (direction, moveMonsters = true) => {
         let position;
         let moveCompleted = false;
         switch (direction) {
@@ -134,7 +133,9 @@ class PlayerProvider extends React.Component {
                 console.log('wrong move input');   
         }
         //if the player made a move (either he could walk or not) the monsters get to make their move
-        this.moveAllMonsters();
+        if(moveMonsters) {
+            this.moveAllMonsters();
+        }
         return moveCompleted;
     }
 

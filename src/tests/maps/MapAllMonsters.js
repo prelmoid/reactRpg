@@ -7,21 +7,29 @@ const tiles = [
 ];
 
 const monsters = [
-    {
-        type: 'rat',
-        position: {x: 0, y: 1}
+    {   
+        state: {
+            type: 'rat',
+            position: {x: 0, y: 1}
+        }
     },
     {
-        type: 'rat',
-        position: {x: 1, y: 0}
+        state: {
+            type: 'rat',
+            position: {x: 1, y: 0}
+        }
     },
     {
-        type: 'rat',
-        position: {x: 1, y: 2}
+        state: {
+            type: 'rat',
+            position: {x: 1, y: 2}
+        }
     },
     {
-        type: 'rat',
-        position: {x: 2, y: 1}
+        state: {
+            type: 'rat',
+            position: {x: 2, y: 1}
+        }
     }
     ];
 
