@@ -43,5 +43,6 @@ const monsters = [
     }
     ];
 
+const playerStartPosition = {x: 1, y: 1};
 
-export default { tiles, monsters };
+export default { tiles, monsters, playerStartPosition };

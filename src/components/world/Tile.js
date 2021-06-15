@@ -57,7 +57,6 @@ const GroundTile = (visibility) => {
 const WallTile = (visibility) => {
     let styles;
     if (visibility.visibility === true) {
-        console.log('wall visible')
         styles = {
             height: 16, width: 16, backgroundImage: `url("/img/UniversalFantasyRLTiles3ed.png")`, backgroundPositionX: -32, backgroundPositionY: -112
         };

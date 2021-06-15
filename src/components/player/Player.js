@@ -27,6 +27,7 @@ class PlayerProvider extends React.Component {
             dungeonLevel: '1_1',
             dungeonMonsters: Maps['1_1'].monsters.map((monster) => new Monster(monster.type, monster.position)),
             setDungeonLevel: this.setDungeonLevel,
+            resetPlayerState: this.resetPlayerState,
             setPosition: this.setPosition,
             calculateAttackDmg: this.calculateAttackDmg,
             calculateExperienceLevel: this.calculateExperienceLevel,
@@ -168,8 +169,11 @@ class PlayerProvider extends React.Component {
     };
 
     setDungeonLevel = ( dungeonMap ) => {
-        this.setState({dungeonLevel: dungeonMap});
-        this.setState({dungeonMonsters: Maps[dungeonMap].monsters})
+        this.setState({dungeonLevel: dungeonMap, dungeonMonsters: Maps[dungeonMap].monsters.map((monster) => new Monster(monster.type, monster.position)), position: Maps[dungeonMap].playerStartPosition});
+    }
+
+    resetPlayerState =() => {
+        this.setState({gold: 10, lvl: 1, experience: 0, experienceToNextLevel: 20, health: 30, maxHealth: 30, armorRating: 5, attackPower: 11});
     }
 
     setPlayerName(name) {

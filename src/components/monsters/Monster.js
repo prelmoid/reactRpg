@@ -87,6 +87,8 @@ class Monster extends React.Component {
         //end game if player has no health left
         if(playerState.health - dmg <= 0) {
             console.log('you died')
+            playerState.setDungeonLevel('1_1');
+            playerState.resetPlayerState();
             return;
         }
         //reduce health of player
