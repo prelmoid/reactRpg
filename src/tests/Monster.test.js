@@ -1,4 +1,3 @@
-
 import Monster from '../components/monsters/Monster';
 
 test('test movement north', () => {
@@ -7,7 +6,7 @@ test('test movement north', () => {
     monsters.push(monster);
     let playerState = {position: {x: 2, y: 2}, dungeonMonsters: monsters, dungeonLevel: 'TestAllMovement'};
     let testMonsterNorth = new Monster('rat', {x: 1, y: 1});
-    expect(testMonsterNorth.moveMonster(playerState, 0)).toEqual(false); //monster on the field
+    expect(testMonsterNorth.moveMonster(playerState, 0)).toEqual(false); 
 });
 
 test('test movement east', () => {
@@ -16,7 +15,7 @@ test('test movement east', () => {
     monsters.push(monster);
     let playerState = {position: {x: 2, y: 2}, dungeonMonsters: monsters, dungeonLevel: 'TestAllMovement'};
     let testMonsterEast = new Monster('rat', {x: 1, y: 1});
-    expect(testMonsterEast.moveMonster(playerState, 1)).toEqual(false); //free field
+    expect(testMonsterEast.moveMonster(playerState, 1)).toEqual(false); 
 });
 
 test('test movement south', () => {
@@ -25,7 +24,7 @@ test('test movement south', () => {
     monsters.push(monster);
     let playerState = {position: {x: 2, y: 2}, dungeonMonsters: monsters, dungeonLevel: 'TestAllMovement'};
     let testMonsterSouth = new Monster('rat', {x: 1, y: 1});
-    expect(testMonsterSouth.moveMonster(playerState, 2)).toEqual(true); //free field
+    expect(testMonsterSouth.moveMonster(playerState, 2)).toEqual(false); 
 });
 
 test('test movement west', () => {
@@ -34,5 +33,5 @@ test('test movement west', () => {
     monsters.push(monster);
     let playerState = {position: {x: 1, y: 0}, dungeonMonsters: monsters, dungeonLevel: 'TestAllMovement'};
     let testMonsterWest = new Monster('rat', {x: 1, y: 1});
-    expect(testMonsterWest.moveMonster(playerState, 3)).toEqual(false); //player on the field
+    expect(testMonsterWest.moveMonster(playerState, 3)).toEqual(true); 
 });
