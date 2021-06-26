@@ -28,7 +28,8 @@ To Visit App After Start:
 `localhost:3000` 
 
 ## Folder Structure:
-    src        components
+    src        
+        components
             app-state - save/load game progress
             dialog-manager - handle dialogs 
             game-menus - game menus (save, load, new game, options[sound on/off], inventory)
