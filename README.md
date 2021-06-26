@@ -10,7 +10,7 @@
     GameMenu (Optional: Start new Game, Save / Load Game, Credits, Options (Sound on / off))[Gamestarts directly, without Save/Load/New]
 
 ## Project Status
-This project is currently in development. At the moment, only the movement of the player is functioning. Other functionalities like monsters, experience are in progress.
+This project is currently in development. At the moment,the player can input a name, move around with (W,A,S,D, or Arrow Keys), he can attack a monster and gain gold and experience from the death of the monster.
 ## Installation and Setup Instructions
 
 Clone down this repository. You will need `npm` installed globally on your machine.  
